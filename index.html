@@ -33,6 +33,7 @@
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(255, 75, 114, 0.15);
       border: 2px solid var(--accent);
+      box-sizing: border-box;
     }
 
     h1, h2, h3 {
@@ -127,40 +128,59 @@
       font-weight: 500;
     }
 
-    /* Interactive Buttons */
+    /* Interactive Buttons Zone */
     .button-zone {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      height: 100px;
+      min-height: 160px;
       position: relative;
+      overflow: hidden;
+      border: 1px dashed #ffb6c1;
+      border-radius: 15px;
+      padding: 10px;
+      background: #fffbfb;
     }
 
     .btn {
-      padding: 12px 25px;
-      font-size: 1.1rem;
       font-weight: bold;
       border: none;
       border-radius: 25px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      transition: transform 0.15s ease-in-out, background-color 0.2s, top 0.2s, left 0.2s;
     }
 
+    /* Large, glowing, attractive YES button */
     .btn-yes {
       background-color: var(--primary);
       color: white;
-      box-shadow: 0 4px 12px rgba(255, 75, 114, 0.4);
+      padding: 18px 45px;
+      font-size: 1.4rem;
+      box-shadow: 0 6px 18px rgba(255, 75, 114, 0.45);
+      z-index: 1;
     }
 
     .btn-yes:hover {
-      transform: scale(1.08);
+      transform: scale(1.12);
+      background-color: #ff2a55;
     }
 
+    /* Small, dull, clear NO button */
     .btn-no {
-      background-color: #6c757d;
-      color: white;
+      background-color: #7f8c8d; /* Dull slate gray */
+      color: #ffffff; /* Clear legible text */
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 8px;
       position: absolute;
+      top: 75%;
+      right: 10%;
+      z-index: 2;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      user-select: none;
     }
 
     .share-container {
@@ -174,6 +194,7 @@
       text-decoration: none;
       display: inline-block;
       font-size: 0.9rem;
+      padding: 10px 20px;
     }
 
     /* Modal / Final Screen */
@@ -241,7 +262,7 @@
         <tr>
           <td>Listening & Focus</td>
           <td>
-            <select class="grade-select">
+            <select class="grade-select" id="gradeListening">
               <option value="A+">A+ (Forgiven!)</option>
               <option value="B">B (Acceptable)</option>
               <option value="C">C (Needs Work)</option>
@@ -253,7 +274,7 @@
         <tr>
           <td>Emotional Concern</td>
           <td>
-            <select class="grade-select">
+            <select class="grade-select" id="gradeConcern">
               <option value="A+">A+ (Thoughtful)</option>
               <option value="B">B (Decent)</option>
               <option value="C">C (Inattentive)</option>
@@ -265,7 +286,7 @@
         <tr>
           <td>Hand Gesture Control</td>
           <td>
-            <select class="grade-select">
+            <select class="grade-select" id="gradeGestures">
               <option value="A+">A+ (Calm Hands)</option>
               <option value="B">B (Mild Gestures)</option>
               <option value="C">C (Animated)</option>
@@ -276,7 +297,7 @@
         <tr>
           <td>Remorse & Devotion</td>
           <td>
-            <select class="grade-select">
+            <select class="grade-select" id="gradeRemorse">
               <option value="A+" selected>A+ (100% Sincere)</option>
               <option value="A">A (Very Sorry)</option>
               <option value="B">B (Trying Hard)</option>
@@ -309,15 +330,15 @@
   <!-- Interactive Forgiveness Zone -->
   <div class="section" style="text-align: center;">
     <h2>Final Verdict: Do You Forgive Me? 🥺</h2>
-    <div class="button-zone">
-      <button class="btn btn-yes" onclick="forgiveMe()">Yes, I forgive you ❤️</button>
-      <button class="btn btn-no" id="noBtn" onmouseover="dodgeButton()" onclick="dodgeButton()">No 😤</button>
+    <div class="button-zone" id="buttonZone">
+      <button class="btn btn-yes" onclick="forgiveMe()">YES, I FORGIVE YOU ❤️</button>
+      <button class="btn btn-no" id="noBtn" onclick="dodgeAndShrink(event)" onmouseenter="dodgeAndShrink(event)">No 😤</button>
     </div>
   </div>
 
   <!-- Share Button for WhatsApp -->
   <div class="share-container">
-    <button class="btn btn-share" onclick="shareToWhatsApp()">📲 Send / Share this page via WhatsApp</button>
+    <button class="btn btn-share" onclick="shareToWhatsApp()">📲 Share this link via WhatsApp</button>
   </div>
 
 </div>
@@ -327,14 +348,14 @@
   <div class="heart">❤️✨🥺</div>
   <h1>THANK YOU!</h1>
   <p>You have officially pardoned the offender!</p>
-  <p>I promise to listen intently, act attentively, and keep my hands under control. I love you!</p>
+  <p>I promise to listen intently, act attentively, and keep my hands under control. Opening WhatsApp so you can send me your verdict... 💬</p>
   <button class="btn btn-yes" onclick="location.reload()">Replay Page 🔄</button>
 </div>
 
 <script>
-  let scaleFactor = 1.0;
+  let currentScale = 1.0;
 
-  // Update Toxicity Meter text
+  // Function to dynamically update Toxicity Meter text and styling
   function updateToxicity(val) {
     const label = document.getElementById('meterLabel');
     let text = "";
@@ -354,8 +375,10 @@
     label.innerText = text;
   }
 
-  // Playful function to make the tiny "No" button dodge mouse/touch and shrink even smaller
-  function dodgeButton() {
+  // Playful function: Changes NO button position AND shrinks it on every click/hover
+  function dodgeAndShrink(event) {
+    if (event) event.preventDefault();
+
     const noBtn = document.getElementById('noBtn');
     const container = document.getElementById('buttonZone');
     
@@ -365,47 +388,46 @@
     const maxX = containerRect.width - btnRect.width;
     const maxY = containerRect.height - btnRect.height;
 
-    // Pick random target position within the bounds
+    // Pick a new random position inside the container
     const randomX = Math.max(10, Math.floor(Math.random() * (maxX - 10)));
     const randomY = Math.max(10, Math.floor(Math.random() * (maxY - 10)));
 
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
 
-    // Shrink the button slightly each attempt (min scale limit)
-    if (scaleFactor > 0.4) {
-      scaleFactor -= 0.1;
-      noBtn.style.transform = `scale(${scaleFactor})`;
+    // Shrink slightly with every attempt (down to a minimum threshold)
+    if (currentScale > 0.35) {
+      currentScale *= 0.85;
+      noBtn.style.transform = `scale(${currentScale})`;
     }
   }
 
-  // Trigger forgiveness confetti and generate WhatsApp response
+  // Trigger forgiveness confetti sequence AND gather inputs to send via WhatsApp
   function forgiveMe() {
-    // 1. Gather all inputs she filled out
+    // 1. Gather all data she entered
     const toxicVal = document.getElementById('toxicMeter').value;
-    const selects = document.querySelectorAll('.grade-select');
-    const listeningGrade = selects[0].value;
-    const concernGrade = selects[1].value;
-    const gestureGrade = selects[2].value;
-    const remorseGrade = selects[3].value;
-    const comments = document.getElementById('judgeComments').value || "None provided!";
+    const listeningGrade = document.getElementById('gradeListening').value;
+    const concernGrade = document.getElementById('gradeConcern').value;
+    const gesturesGrade = document.getElementById('gradeGestures').value;
+    const remorseGrade = document.getElementById('gradeRemorse').value;
+    const notes = document.getElementById('judgeComments').value.trim() || "No additional punishment specified!";
 
-    // 2. Format a summary message
-    const summaryMessage = 
-      `⚖️ *OFFICIAL COURT VERDICT* ⚖️\n\n` +
-      `• Toxicity Level: ${toxicVal}%\n` +
+    // 2. Format message text
+    const responseMsg = 
+      `⚖️ *OFFICIAL COURT VERDICT & GRADES* ⚖️\n\n` +
+      `• Toxicity Score: ${toxicVal}%\n` +
       `• Listening Grade: ${listeningGrade}\n` +
-      `• Concern Grade: ${concernGrade}\n` +
-      `• Hand Gestures Grade: ${gestureGrade}\n` +
-      `• Remorse Grade: ${remorseGrade}\n\n` +
-      `📝 *Magistrate's Notes:* "${comments}"\n\n` +
-      `❤️ *Verdict:* YOU ARE FORGIVEN!`;
+      `• Emotional Concern Grade: ${concernGrade}\n` +
+      `• Hand Gesture Control Grade: ${gesturesGrade}\n` +
+      `• Remorse & Devotion Grade: ${remorseGrade}\n\n` +
+      `📝 *Magistrate's Punishment/Notes:* "${notes}"\n\n` +
+      `❤️ *Final Decision:* YOU ARE FORGIVEN!`;
 
     // 3. Show confetti screen
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('forgiveness-modal').style.display = 'block';
 
-    // Launch Confetti
+    // Launch Canvas Confetti
     var duration = 3 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -423,12 +445,20 @@
       confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
     }, 250);
 
-    // 4. Open WhatsApp automatically with her exact answers filled in
+    // 4. Automatically open WhatsApp after 1.5 seconds delay
     setTimeout(() => {
-      window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(summaryMessage), '_blank');
+      window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(responseMsg), '_blank');
     }, 1500);
+  }
+
+  // Initial link share button function
+  function shareToWhatsApp() {
+    const pageUrl = window.location.href;
+    const message = encodeURIComponent("I made an interactive apology case file for you... Complete with a slider & grading report. Render your verdict here 🥺❤️: " + pageUrl);
+    window.open("https://api.whatsapp.com/send?text=" + message, '_blank');
   }
 </script>
 
 </body>
 </html>
+
