@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>An Official Statement of Apology 🥺</title>
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --primary: #ff4b72;
+      --bg: #fff5f7;
+      --card-bg: #ffffff;
+      --text: #333333;
+      --accent: #ffd1dc;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(255, 75, 114, 0.15);
+      border: 2px solid var(--accent);
+    }
+
+    h1, h2, h3 {
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .header-sub {
+      text-align: center;
+      font-style: italic;
+      color: #666;
+      margin-top: -10px;
+      margin-bottom: 25px;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid #ffe0e6;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    /* Toxicity Meter Controls */
+    .slider-wrapper {
+      margin: 20px 0 10px 0;
+      text-align: center;
+    }
+
+    .toxic-slider {
+      width: 100%;
+      height: 12px;
+      border-radius: 10px;
+      background: #e0e0e0;
+      outline: none;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .meter-label {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #d9534f;
+      margin-top: 10px;
+      padding: 8px;
+      background: #fff0f3;
+      border-radius: 8px;
+    }
+
+    /* Report Card Styling */
+    .report-card table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+
+    .report-card th, .report-card td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ffe0e6;
+    }
+
+    .grade-select {
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid #ff9a9e;
+      background-color: #fff;
+      font-weight: bold;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .judge-notes-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ffb6c1;
+      font-family: inherit;
+      resize: vertical;
+      margin-top: 5px;
+    }
+
+    /* Court Section */
+    .verdict-box {
+      background-color: #fff0f3;
+      border-left: 5px solid var(--primary);
+      padding: 10px 15px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* Interactive Buttons */
+    .button-zone {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      height: 100px;
+      position: relative;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .btn-yes {
+      background-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 75, 114, 0.4);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.08);
+    }
+
+    .btn-no {
+      background-color: #6c757d;
+      color: white;
+      position: absolute;
+    }
+
+    .share-container {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .btn-share {
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+
+    /* Modal / Final Screen */
+    #forgiveness-modal {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .heart {
+      font-size: 50px;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="main-content">
+  
+  <h1>Case File: The Apology of a Clueless Boyfriend</h1>
+  <p class="header-sub">Submitted to the Supreme Magistrate of My Heart</p>
+
+  <!-- Self-Incrimination -->
+  <div class="section">
+    <h2>1. Formal Self-Incrimination & Confession</h2>
+    <p>I hereby plead <strong>100% GUILTY</strong> to all counts of unacceptable boyfriend behavior. I publicly admit to the following offenses:</p>
+    <ul>
+      <li><strong>Terminal Inattentiveness:</strong> Looking at you while my brain was running on 1% battery and completely buffering.</li>
+      <li><strong>Severe Lack of Concern:</strong> Failing to immediately recognize your mood shift and act with the sensitivity you deserve.</li>
+      <li><strong>Wild & Unnecessary Gesticulating:</strong> Talking with my hands like a faulty windmill instead of just shutting up and listening properly to what you were telling me.</li>
+    </ul>
+  </div>
+
+  <!-- Interactive Toxicity Meter -->
+  <div class="section">
+    <h2>2. Toxicity Meter™ (Adjustable by You)</h2>
+    <p>Slide to calibrate how toxic/foolish my actions felt from your perspective:</p>
+    
+    <div class="slider-wrapper">
+      <input type="range" min="0" max="100" value="88" class="toxic-slider" id="toxicMeter" oninput="updateToxicity(this.value)">
+    </div>
+    
+    <div class="meter-label" id="meterLabel">
+      Current Severity Level: 88% — Dangerously Foolish Goofball ⚠️
+    </div>
+  </div>
+
+  <!-- Interactive Boyfriend Performance Grading Report -->
+  <div class="section report-card">
+    <h2>3. Interactive Boyfriend Performance Report Card</h2>
+    <p>Please select the grade you feel I currently deserve for each offense:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Your Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Listening & Focus</td>
+          <td>
+            <select class="grade-select">
+              <option value="A+">A+ (Forgiven!)</option>
+              <option value="B">B (Acceptable)</option>
+              <option value="C">C (Needs Work)</option>
+              <option value="D">D (Poor Focus)</option>
+              <option value="F" selected>F (Total Lag)</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Emotional Concern</td>
+          <td>
+            <select class="grade-select">
+              <option value="A+">A+ (Thoughtful)</option>
+              <option value="B">B (Decent)</option>
+              <option value="C">C (Inattentive)</option>
+              <option value="D" selected>D- (Late Response)</option>
+              <option value="F">F (Zero Sympathy)</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Hand Gesture Control</td>
+          <td>
+            <select class="grade-select">
+              <option value="A+">A+ (Calm Hands)</option>
+              <option value="B">B (Mild Gestures)</option>
+              <option value="C">C (Animated)</option>
+              <option value="F" selected>F (Windmill Mode)</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Remorse & Devotion</td>
+          <td>
+            <select class="grade-select">
+              <option value="A+" selected>A+ (100% Sincere)</option>
+              <option value="A">A (Very Sorry)</option>
+              <option value="B">B (Trying Hard)</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <label for="judgeComments"><strong>Magistrate's Official Notes & Feedback:</strong></label>
+    <textarea id="judgeComments" class="judge-notes-input" rows="3" placeholder="Add your feedback or required punishment here (e.g. 'Must buy me boba tomorrow')..."></textarea>
+  </div>
+
+  <!-- Court of Baby -->
+  <div class="section">
+    <h2>4. The Court of Baby</h2>
+    <p>In the honorable court presided over by the absolute judge, jury, and sovereign ruler of this relationship (You):</p>
+    <div class="verdict-box">
+      <strong>Prosecution Statement:</strong> "The defendant did not pay proper attention, lacked appropriate concern, and used excessive theatrical hand movements."<br/><br/>
+      <strong>My Defense:</strong> None. I have no defense. I offer only unconditional sincere regret, a promise to do better, and an unlimited supply of your favorite treats.
+    </div>
+  </div>
+
+  <!-- Romantic Apology -->
+  <div class="section">
+    <h2>5. A Real Note from My Heart</h2>
+    <p>All jokes aside, I am genuinely so sorry. I hate that I disappointed you, appeared unconcerned, or made you feel like I wasn't fully present. You always deserve my full attention, my gentlest care, and my genuine focus. I love you so much, and I want to make it up to you properly.</p>
+  </div>
+
+  <!-- Interactive Forgiveness Zone -->
+  <div class="section" style="text-align: center;">
+    <h2>Final Verdict: Do You Forgive Me? 🥺</h2>
+    <div class="button-zone">
+      <button class="btn btn-yes" onclick="forgiveMe()">Yes, I forgive you ❤️</button>
+      <button class="btn btn-no" id="noBtn" onmouseover="dodgeButton()" onclick="dodgeButton()">No 😤</button>
+    </div>
+  </div>
+
+  <!-- Share Button for WhatsApp -->
+  <div class="share-container">
+    <button class="btn btn-share" onclick="shareToWhatsApp()">📲 Send / Share this page via WhatsApp</button>
+  </div>
+
+</div>
+
+<!-- Confetti / Forgiveness Screen -->
+<div class="container" id="forgiveness-modal">
+  <div class="heart">❤️✨🥺</div>
+  <h1>THANK YOU!</h1>
+  <p>You have officially pardoned the offender!</p>
+  <p>I promise to listen intently, act attentively, and keep my hands under control. I love you!</p>
+  <button class="btn btn-yes" onclick="location.reload()">Replay Page 🔄</button>
+</div>
+
+<script>
+  // Function to dynamically update Toxicity Meter text and styling
+  function updateToxicity(val) {
+    const label = document.getElementById('meterLabel');
+    let text = "";
+    if (val < 25) {
+      text = `Current Severity Level: ${val}% — Minor Brain Lag 🤏`;
+      label.style.color = "#28a745";
+    } else if (val < 60) {
+      text = `Current Severity Level: ${val}% — Silly & Unattentive 🤨`;
+      label.style.color = "#ffc107";
+    } else if (val < 85) {
+      text = `Current Severity Level: ${val}% — Dangerously Foolish Goofball ⚠️`;
+      label.style.color = "#fd7e14";
+    } else {
+      text = `Current Severity Level: ${val}% — Maximum Toxicity Offense 🚨🚨`;
+      label.style.color = "#d9534f";
+    }
+    label.innerText = text;
+  }
+
+  // Function to make the "No 😤" button runaway/dodge the cursor
+  function dodgeButton() {
+    const noBtn = document.getElementById('noBtn');
+    const container = document.querySelector('.button-zone');
+    
+    const containerRect = container.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = containerRect.width - btnRect.width;
+    const maxY = containerRect.height - btnRect.height;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+  }
+
+  // Trigger forgiveness confetti sequence
+  function forgiveMe() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('forgiveness-modal').style.display = 'block';
+
+    // Launch Canvas Confetti
+    var duration = 3 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    var interval = setInterval(function() {
+      var timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      var particleCount = 50 * (timeLeft / duration);
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+  }
+
+  // WhatsApp sharing integration
+  function shareToWhatsApp() {
+    const pageUrl = window.location.href;
+    const message = encodeURIComponent("I made an interactive apology case file for you... Complete with a slider & grading report. Render your verdict here 🥺❤️: " + pageUrl);
+    window.open("https://api.whatsapp.com/send?text=" + message, '_blank');
+  }
+</script>
+
+</body>
+</html>
