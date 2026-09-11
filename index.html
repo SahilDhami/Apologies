@@ -332,7 +332,9 @@
 </div>
 
 <script>
-  // Function to dynamically update Toxicity Meter text and styling
+  let scaleFactor = 1.0;
+
+  // Update Toxicity Meter text
   function updateToxicity(val) {
     const label = document.getElementById('meterLabel');
     let text = "";
@@ -377,12 +379,33 @@
     }
   }
 
-  // Trigger forgiveness confetti sequence
+  // Trigger forgiveness confetti and generate WhatsApp response
   function forgiveMe() {
+    // 1. Gather all inputs she filled out
+    const toxicVal = document.getElementById('toxicMeter').value;
+    const selects = document.querySelectorAll('.grade-select');
+    const listeningGrade = selects[0].value;
+    const concernGrade = selects[1].value;
+    const gestureGrade = selects[2].value;
+    const remorseGrade = selects[3].value;
+    const comments = document.getElementById('judgeComments').value || "None provided!";
+
+    // 2. Format a summary message
+    const summaryMessage = 
+      `⚖️ *OFFICIAL COURT VERDICT* ⚖️\n\n` +
+      `• Toxicity Level: ${toxicVal}%\n` +
+      `• Listening Grade: ${listeningGrade}\n` +
+      `• Concern Grade: ${concernGrade}\n` +
+      `• Hand Gestures Grade: ${gestureGrade}\n` +
+      `• Remorse Grade: ${remorseGrade}\n\n` +
+      `📝 *Magistrate's Notes:* "${comments}"\n\n` +
+      `❤️ *Verdict:* YOU ARE FORGIVEN!`;
+
+    // 3. Show confetti screen
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('forgiveness-modal').style.display = 'block';
 
-    // Launch Canvas Confetti
+    // Launch Confetti
     var duration = 3 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -393,22 +416,17 @@
 
     var interval = setInterval(function() {
       var timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
+      if (timeLeft <= 0) return clearInterval(interval);
 
       var particleCount = 50 * (timeLeft / duration);
       confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
       confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
     }, 250);
-  }
 
-  // WhatsApp sharing integration
-  function shareToWhatsApp() {
-    const pageUrl = window.location.href;
-    const message = encodeURIComponent("I made an interactive apology case file for you... Complete with a slider & grading report. Render your verdict here 🥺❤️: " + pageUrl);
-    window.open("https://api.whatsapp.com/send?text=" + message, '_blank');
+    // 4. Open WhatsApp automatically with her exact answers filled in
+    setTimeout(() => {
+      window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(summaryMessage), '_blank');
+    }, 1500);
   }
 </script>
 
