@@ -1,0 +1,284 @@
+/* ==========================================================================
+   THE APOLOGY PAGE - MODERN GLASSMORPHIC & ANIMATED CSS THEME
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+
+:root {
+  --primary-glow: #ff4b8b;
+  --secondary-glow: #9d4edd;
+  --accent-pink: #ff75a0;
+  --bg-dark: #0f0716;
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --text-main: #f8f9fa;
+  --text-muted: #d0c7de;
+  --card-radius: 20px;
+}
+
+/* Base Setup */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.6;
+  padding: 40px 20px;
+  overflow-x: hidden;
+  position: relative;
+
+  /* Royalty-Free Romantic Background Image from Unsplash with Ambient Dark Overlay */
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(255, 75, 139, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.25) 0%, transparent 40%),
+    linear-gradient(rgba(15, 7, 22, 0.88), rgba(15, 7, 22, 0.92)),
+    url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Floating Light Orbs Animation */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: -1;
+  pointer-events: none;
+  animation: floatGlow 12s infinite alternate ease-in-out;
+}
+
+body::before {
+  background: var(--primary-glow);
+  top: -50px;
+  left: -50px;
+}
+
+body::after {
+  background: var(--secondary-glow);
+  bottom: -50px;
+  right: -50px;
+  animation-delay: -6s;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(80px, 60px) scale(1.2); }
+}
+
+/* Main Container Layout */
+.container, main, div[class*="content"] {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+h1 + p {
+  text-align: center;
+  color: var(--accent-pink);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* Glassmorphic Cards (Sections) */
+div > div, section, .card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--card-radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+div > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(255, 75, 139, 0.2);
+  border-color: rgba(255, 117, 160, 0.4);
+}
+
+/* Section Titles */
+h2 {
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+p, li {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 12px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+li strong {
+  color: #ffffff;
+}
+
+/* Custom Interactive Range Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  margin: 18px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--accent-pink);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Styled Report Card Table */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+th, td {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+td {
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom Select Dropdowns */
+select {
+  background: rgba(15, 7, 22, 0.8);
+  color: #fff;
+  border: 1px solid var(--glass-border);
+  padding: 8px 14px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+select:focus {
+  border-color: var(--accent-pink);
+}
+
+/* Court Defense Box */
+.defense-box, blockquote {
+  background: rgba(255, 75, 139, 0.08);
+  border-left: 4px solid var(--accent-pink);
+  padding: 16px;
+  border-radius: 0 12px 12px 0;
+  margin-top: 12px;
+}
+
+/* Action Buttons */
+button, .btn {
+  background: linear-gradient(135deg, var(--primary-glow) 0%, var(--secondary-glow) 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 75, 139, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-block;
+  margin: 10px 5px;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(255, 75, 139, 0.6);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* Keyframe Entrance Animations */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 12px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  div > div {
+    padding: 20px;
+  }
+}
